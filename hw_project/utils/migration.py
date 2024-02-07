@@ -31,3 +31,15 @@ for quote in quotes:
     for tag in quote['tags']:
         t, *_ = Tag.objects.get_or_create(name=tag)
         tags.append(t)
+
+        exist_quote = bool(len(Quote.objects.filter(quote=quote['quote'])))
+
+        if not exist_quote:
+            author = db.authors.find_one({'_id': quote['author']})
+            a = Author.objects.get(fullname=author['fullname'])
+            q = Quote.objects.create(
+                quote=quote['quote'],
+                author=a
+            )
+            for tag in tags:
+                q.tags.add(tag)
