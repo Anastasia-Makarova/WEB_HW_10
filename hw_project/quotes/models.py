@@ -16,9 +16,15 @@ class Author(Model):
     description = TextField()
     created_at = DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Tag(Model):
     name = CharField(max_length=30, null=False, unique=True)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Quote(Model):
@@ -26,3 +32,7 @@ class Quote(Model):
     tags = ManyToManyField(Tag)
     author = ForeignKey(Author, on_delete=CASCADE, default=None, null=True)
     created_at = DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name}"
+

@@ -15,7 +15,7 @@
 
 .quote small.author {
     font-weight: bold;
-    color: #7b0202;
+    color: #0335fa;
 }
 
 .quote .tags {
@@ -29,9 +29,9 @@
 .tag {
     padding: 2px 5px;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: small;
-    background-color: #0dcaf0;
+    background-color: #e5bb00;
 }
 
 .pager {

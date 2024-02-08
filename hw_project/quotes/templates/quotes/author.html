@@ -1,0 +1,35 @@
+{% extends 'quotes/base.html' %}
+{% load extract %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8">
+
+
+
+    <div class="fullname" itemscope="" itemtype="http://schema.org/CreativeWork">
+        <span class="text" itemprop="text">
+            {{author['fullname']}}
+        </span>
+
+        <span class="born_date" itemprop="born_date">
+            {{author['born_date']}}
+        </span>
+
+        <span class="born_location" itemprop="born_location">
+            {{author['born_location']}}
+        </span>
+
+        <span class="description" itemprop="description">
+            {{author['description']}}
+        </span>
+
+
+    </div>
+
+    </div>
+   
+</div>
+
+{% endblock %}
