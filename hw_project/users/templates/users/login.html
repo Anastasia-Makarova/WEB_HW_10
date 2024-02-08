@@ -1,4 +1,4 @@
-{% extends 'quotes/base.html' %} <!--base template connection-->
+{% extends 'quotes/base.html' %} 
 
 {% block content %}
 <div class="container mt-3">  
@@ -14,7 +14,7 @@
     {% endif %}
 
     {% if form.errors and form.non_field_errors %}
-    <div class="alert alert-danger" role="alert"> <!---Danger alert from Bootstrap Alerts-->
+    <div class="alert alert-danger" role="alert"> 
       {{form.non_field_errors}}
     </div>
     {% endif %}
@@ -25,14 +25,14 @@
         <label class="form-label">Username
         {{ form.username }}
         </label>
-        <span>{{ form.errors.username }}</span> <!--Handling errors-->
+        <span>{{ form.errors.username }}</span>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Password
         {{ form.password }}
         </label>
-        <span>{{ form.errors.password }}</span> <!--Handling errors-->
+        <span>{{ form.errors.password }}</span>
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>

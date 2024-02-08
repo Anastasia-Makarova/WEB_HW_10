@@ -12,9 +12,9 @@ class RegisterView(View):
     template_name = 'users/register.html'
     form_class = RegisterForm
 
-    def dispatch(self, request, *args, **kwargs): #bloks sign pages for loggedin users
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect(to="quotes:home")
+            return redirect(to="quotes:root")
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):
@@ -28,5 +28,5 @@ class RegisterView(View):
             username = form.cleaned_data["username"]
             messages.success(request, f"Вітаємо {username}. Ваш акаунт успішно створено")
             
-            return redirect(to="users:signin")
+            return redirect(to="users:login")
         return render(request, self.template_name, {"form": form})
