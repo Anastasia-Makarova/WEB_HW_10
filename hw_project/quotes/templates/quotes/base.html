@@ -13,34 +13,47 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row header-box pt-3 mb-3">
-            <div class="col-md-8">
-                <h1>
-                    <a href="/" style="text-decoration: none">Quotes to Scrape</a>
-                </h1>
-            </div>
-            <div class="col-md-4">
-                <p>
-                    {% if user.is_authenticated %}
-                    <form method="POST" action="{% url 'users:logout' %}">
-                        {% csrf_token %}
-                        <button type="submit" href="{% url 'users:logout' %}">Logout</button>
-                    </form>
+     
 
-                    {% else %}
-                    <a href="users/register" class="btn btn-info">Register</a>
-                    <a href="users/login" class="btn btn-info">Login</a>
-                    
-                    {% endif %}
-                </p>
-            </div>
+
+    <div class="container mt-3">
+        <div class="col-md-auto">
+            <p>
+                {% if user.is_authenticated %}
+
+                <div class="container">
+                    <div class="row align-items-start">
+                      <div class="col text-left">
+                        <a href="/users/register" class="btn btn-info">Add author</a>
+                        <a href="/users/login" class="btn btn-info">Add quote</a>
+                      </div>
+                      <div class="col text-right">
+                        <form method="POST" action="{% url 'users:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" href="{% url 'users:logout' %}">Logout</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                {% else %}
+                <a href="/users/register" class="btn btn-info">Register</a>
+                <a href="/users/login" class="btn btn-info">Login</a>
+                
+                {% endif %}
+            </p>
         </div>
-    
 
-        {% block content %} {% endblock %}
+        <div class="col-md-auto">
+            <h1>
+                <a href="/" style="text-decoration: none">Quotes to Scrape</a>
+            </h1>
+            {% block content %} {% endblock %}
+        </div>
 
-</div> 
+     </div> 
 </body>
 
 </html>
