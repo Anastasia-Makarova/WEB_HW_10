@@ -6,28 +6,36 @@
 <div class="row">
     <div class="col-md-8">
 
-        {{ add_author }}
         <h2>Add Author</h2>
-
-        <form>
+        {% if form.errors and form.non_field.errors %}
+        <div class="alert alert-danger" role="alert">
+          {{form.non_field.errors}}
+        </div>
+        {% endif %}
+        <form action="{% url 'quotes:add_author' %}" method="post">
+            {% csrf_token %}
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Full name</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Author's full name">
+              <label for="AuthorName" class="form-label">Full name</label>
+              {{ form.fullname }}
+              <span>{{form.errors.fullname}}</span>
             </div>
 
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Born at</label>
-              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Date of birth">
+              <label for="AuthorBornAt" class="form-label">Born at</label>
+              {{ form.born_date }}
+              <span>{{form.errors.born_date}}</span>
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Born in</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Place of birth">
+                <label for="AuthorBornIn" class="form-label">Born in</label>
+                {{ form.born_location }}
+                <span>{{form.errors.born_location}}</span>
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Description</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="About an author: short bio or similar">
+                <label for="AuthorDescription" class="form-label">Description</label>
+                {{ form.description }}
+                <span>{{form.errors.description}}</span>
               </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

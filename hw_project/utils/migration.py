@@ -3,7 +3,11 @@ import os
 
 from pymongo import MongoClient
 
+"""
+cd hw_project
+py -m utils.migration
 
+"""
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hw_project.settings')
 django.setup()
 
