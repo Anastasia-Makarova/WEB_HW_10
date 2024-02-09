@@ -15,6 +15,6 @@ def main(request, page=1):
     quotes_on_page = paginator.page(page)
     return render(request, 'quotes/index.html', context={'quotes': quotes_on_page})
 
-def author(request, author_id):
-    author = Author.objects.get(author_id)
-    return render(request, "quotes/author.html", {'form': AuthorForm()})
+def author(request, author):
+    author = Author.objects.get(author)
+    return render(request, "quotes/author.html", context={'author': author})
