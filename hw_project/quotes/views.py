@@ -1,21 +1,13 @@
 from bson.objectid import ObjectId
 
-# import django
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-# import os
-# from pymongo import MongoClient
+
 
 from .utils import get_mongodb
 from .models import Quote, Author, Tag
 from .forms import QuoteForm, AuthorForm, TagForm
 
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hw_project.settings')
-# django.setup()
-
-# client = MongoClient('mongodb://localhost')
-
-# db = client.HW10
 
 def main(request, page=1):
     db = get_mongodb()
@@ -34,13 +26,13 @@ def add_author(request):
     if request.method == 'POST':
         form = AuthorForm(request.POST, instance=Author())
         if form.is_valid():
-            form.save()
-            # Author.objects.get_or_create(
-            #     fullname=form.cleaned_data["fullname"],
-            #     born_date=form.cleaned_data["born_date"],
-            #     born_location=form.cleaned_data["born_location"],
-            #     description=form.cleaned_data["description"]
-            #     )
+            db = get_mongodb()
+            db.authors.insert_one({
+                'fullname': form.cleaned_data["fullname"],
+                'born_date': form.cleaned_data["born_date"],
+                'born_location': form.cleaned_data["born_location"],
+                'description':form.cleaned_data["description"]
+                })
             
             return redirect(to='/')
 
