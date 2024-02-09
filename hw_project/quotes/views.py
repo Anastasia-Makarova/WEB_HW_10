@@ -18,3 +18,11 @@ def main(request, page=1):
 def author(request, author):
     author = Author.objects.get(author)
     return render(request, "quotes/author.html", context={'author': author})
+
+def add_author(request):
+    txt = "add author"
+    return render(request, 'quotes/add_author.html', context={'add_author': txt})
+
+def add_quote(request):
+    txt = "add quote"
+    return render(request, 'quotes/add_quote.html', context={'add_quote': txt})
