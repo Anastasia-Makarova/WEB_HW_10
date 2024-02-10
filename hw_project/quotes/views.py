@@ -2,6 +2,7 @@ from bson.objectid import ObjectId
 
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 
 from .utils import get_mongodb
@@ -17,10 +18,12 @@ def main(request, page=1):
     quotes_on_page = paginator.page(page)
     return render(request, 'quotes/index.html', context={'quotes': quotes_on_page})
 
-def author(request, author):
-    author = Author.objects.get(author)
-    return render(request, "quotes/author.html", context={'author': author})
+def author(request, author_id):
+    db = get_mongodb()
+    author = db.authors.find({'_id': ObjectId(author_id)})
+    return render(request, "quotes/author.html", context={'author_info': author})
 
+@login_required
 def add_author(request):
     form = AuthorForm(instance=Author())
     if request.method == 'POST':
@@ -38,6 +41,32 @@ def add_author(request):
 
     return render(request, 'quotes/add_author.html', context={'form': form})
 
+def normalize_tags(tags): 
+    return tags.split(',')
+
+@login_required
 def add_quote(request):
-    txt = "add quote"
-    return render(request, 'quotes/add_quote.html', context={'add_quote': txt})
+    
+    form = QuoteForm(instance=Quote())
+    if request.method == 'POST':
+        form = QuoteForm(request.POST, instance=Quote())
+        tags = request.POST['tags']
+        if tags == '':
+            return render(request, 'quotes/add_quote.html',
+                  context={'quote_form': form})
+        if form.is_valid():
+            db = get_mongodb()
+            db.quotes.insert_one({
+                'author': form.cleaned_data["quote"],
+                'tags': normalize_tags(tags),
+                'author': form.cleaned_data["author"],
+
+                })
+            # quote = quote_form.save(commit=False)
+            # quote.user = request.user
+            # quote.save()
+            # for t in list_tags:
+            #     tag = Tag.objects.get_or_create(name = t)
+            #     quote.tags.add(tag[0])
+            return redirect(to='/')
+    return render(request, 'quotes/add_quote.html', context={'quote_form': form})

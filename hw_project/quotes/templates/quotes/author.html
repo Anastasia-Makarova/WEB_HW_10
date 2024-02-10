@@ -3,33 +3,14 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col-md-8">
-
-
-
-    <div class="fullname" itemscope="" itemtype="http://schema.org/CreativeWork">
-        <span class="text" itemprop="text">
-            {{author['fullname']}}
-        </span>
-
-        <span class="born_date" itemprop="born_date">
-            {{author['born_date']}}
-        </span>
-
-        <span class="born_location" itemprop="born_location">
-            {{author['born_location']}}
-        </span>
-
-        <span class="description" itemprop="description">
-            {{author['description']}}
-        </span>
-
-
+<div class="author-details">
+    <h3 class="author-title">{{author_info.fullname}}</h3>
+    <p><strong>Born:</strong> <span class="author-born-date">{{author.born_date}}</span> <span class="author-born-location">
+            {{author_info.born_location}}</span></p>
+    <p><strong>Description:</strong></p>
+    <div class="author-description">
+        {{author_info.description}}
     </div>
-
-    </div>
-   
 </div>
 
 {% endblock %}
