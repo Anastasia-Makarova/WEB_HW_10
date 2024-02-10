@@ -18,10 +18,10 @@ def main(request, page=1):
     quotes_on_page = paginator.page(page)
     return render(request, 'quotes/index.html', context={'quotes': quotes_on_page})
 
-def author(request, author_id):
+def author(request, author):
     db = get_mongodb()
-    author = db.authors.find({'_id': ObjectId(author_id)})
-    return render(request, "quotes/author.html", context={'author_info': author})
+    author = db.authors.find_one({'_id': ObjectId(author)})
+    return render(request, "quotes/author.html", context={'author': author})
 
 @login_required
 def add_author(request):
