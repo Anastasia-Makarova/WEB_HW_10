@@ -28,13 +28,6 @@ def add_author(request):
     if request.method == 'POST':
         form = AuthorForm(request.POST, instance=Author())
         if form.is_valid():
-            # db = get_mongodb()
-            # db.authors.insert_one({
-            #     'fullname': form.cleaned_data["fullname"],
-            #     'born_date': form.cleaned_data["born_date"],
-            #     'born_location': form.cleaned_data["born_location"],
-            #     'description':form.cleaned_data["description"]
-            #     })
             form.save()
             
             return redirect(to='/')

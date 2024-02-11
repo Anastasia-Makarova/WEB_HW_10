@@ -17,8 +17,15 @@
         </small>
         <a href="/author/{{quote.author.id}}">(about)</a>
         </span>
+        <div class="tags">
+            Tags:
+            ({% for tag in quote.tags.objects %}
+            <a class="tag" href="/tag/{{tag.name}}">{{tag.name}}</a>
+            {% endfor %})
+        </div>
 
     </div>
+
 
 
 
