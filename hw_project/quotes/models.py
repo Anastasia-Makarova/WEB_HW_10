@@ -16,10 +16,16 @@ class Author(Model):
     description = TextField()
     created_at = DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.fullname}"
+
 
 
 class Tag(Model):
     name = CharField(null=False, unique=True)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 

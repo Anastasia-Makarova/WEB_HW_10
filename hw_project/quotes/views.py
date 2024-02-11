@@ -35,7 +35,7 @@ def add_author(request):
     return render(request, 'quotes/add_author.html', context={'form': form})
 
 def normalize_tags(tags): 
-    return tags.split(',')
+    return tags.strip().split(',')
 
 @login_required
 def add_quote(request):
