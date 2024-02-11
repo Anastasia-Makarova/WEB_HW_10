@@ -3,8 +3,10 @@ from .models import Author, Tag, Quote
 from .utils import get_mongodb
 
 
+db = get_mongodb()
+
 def authors_list():
-    db = get_mongodb()
+    # db = get_mongodb()
     authors = []
     base = db.authors.find()
     for author in base:
@@ -27,8 +29,8 @@ class AuthorForm(ModelForm):
 class QuoteForm(ModelForm):
     quote = CharField(required=True, widget=TextInput(attrs={'class': 'form-control', 'id': 'QuoteText'}))
     tags = CharField(widget=TextInput(attrs={'class': 'form-control', 'id': 'QuoteTags'}))
-    # author = ModelChoiceField(queryset = Author.objects.all(), widget=Select(attrs={'class': 'form-control', 'id': 'QuoteAuthor'}))
-    author = CharField( widget=TextInput(attrs={'class': 'form-control', 'id': 'QuoteAuthor'}))
+    author = ModelChoiceField(queryset = db.authors.objects, widget=Select(attrs={'class': 'form-control', 'id': 'QuoteAuthor'}))
+    # author = CharField( widget=TextInput(attrs={'class': 'form-control', 'id': 'QuoteAuthor'}))
 
 
     class Meta:
