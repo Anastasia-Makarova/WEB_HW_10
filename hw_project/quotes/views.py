@@ -9,13 +9,12 @@ from .utils import get_mongodb
 from .models import Quote, Author, Tag
 from .forms import QuoteForm, AuthorForm, TagForm
 
-db = get_mongodb()
 
 def main(request, page=1):
     quotes = Quote.objects.all()
     per_page = 10
     paginator = Paginator(list(quotes), per_page)
-    quotes_on_page = paginator.page(page)
+    quotes_on_page = paginator.get_page(request.GET.get('page'))
     return render(request, 'quotes/index.html', context={'quotes': quotes_on_page})
 
 def author(request, author):

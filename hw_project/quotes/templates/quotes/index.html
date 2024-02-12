@@ -19,7 +19,7 @@
         </span>
         <div class="tags">
             Tags:
-            ({% for tag in quote.tags.all() %}
+            ({% for tag in quote.tags.all %}
             <a class="tag" href="/tag/{{tag.name}}">{{tag.name}}</a>
             {% endfor %})
         </div>
